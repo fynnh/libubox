@@ -1,0 +1,10 @@
+# libubox
+
+
+It's one of the core libraries used within openwrt because it's a set of utilities, mostly wrappers, that are present usually in programs and that have been coded in a flexible and reusable way to avoid wasting time.
+
+The library consists mostly on independent functionalities, ones higher level than others.
+
+## License
+
+This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details
