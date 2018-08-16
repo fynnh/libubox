@@ -16,16 +16,15 @@ env:
   - BINTRAY_LICENSE=ISC
   matrix:
   - ARCHITECTURE=trusty/amd64
-  - ARCHITECTURE=trusty/i386  
+  - ARCHITECTURE=trusty/i386
+  
 sudo: required
-
 services:
   - docker
     
 before_install:
   - docker build -t $ARCHITECTURE $ARCHITECTURE
-#  - docker run $ARCHITECTURE
-  - docker ps -a
+
 script:
   - export NUMBER=${TRAVIS_BUILD_NUMBER}
   - export BUILD_VERSION=1.$NUMBER
@@ -43,15 +42,13 @@ before_deploy:
   - sed -i "s/__VERSION__/$BUILD_VERSION/g" bintray-descriptor.json
   - sed -i "s/__ARCHITECTURE__/$ARCH/g" bintray-descriptor.json
   - sed -i "s/__DIST__/$DIST/g" bintray-descriptor.json
-  - cat bintray-descriptor.json
-  - ls
   - git tag "${BUILD_VERSION}" || true
 
 deploy:
   - provider: releases
     api_key: $GITHUB_API_KEY
     file_glob: true
-    file: ubox-*-${DIST}_${ARCH}.deb 
+    file: ${PACKAGE_NAME}-*-${DIST}_${ARCH}.deb 
     skip_cleanup: true
     on:
       branch: master
