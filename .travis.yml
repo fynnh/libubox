@@ -24,13 +24,13 @@ services:
     
 before_install:
   - docker build -t $ARCHITECTURE $ARCHITECTURE
-  - docker run $ARCHITECTURE
+#  - docker run $ARCHITECTURE
   - docker ps -a
 script:
   - export DATE=$(date +'%Y%m%d%H%M%S')
   - export BUILD_VERSION=1.$DATE
   - export BUILD_DATE=$(date "+%Y%m%d")    
-  - cmake . -DBUILD_LUA=OFF -DMINOR="${DATE}"
+  - docker run $ARCHITECTUREa /bin/sh -c "cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}"  
   - make -j1
   - make package
 
