@@ -15,8 +15,7 @@ env:
   - BINTRAY_REPO_NAME=debian
   - BINTRAY_LICENSE=ISC
   matrix:
-  - DIST=ubuntu/trusty
-  - ARCHITECTURE=amd64
+  - ARCHITECTURE=ubuntu/trusty/amd64
   
 sudo: required
 
@@ -24,8 +23,8 @@ services:
   - docker
     
 before_install:
-  - docker build -t $DIST/$ARCHITECTURE $DIST/$ARCHITECTURE
-  - docker run $DIST/$ARCHITECTURE
+  - docker build -t $ARCHITECTURE $ARCHITECTURE
+  - docker run $ARCHITECTURE
   - docker ps -a
 script:
   - export DATE=$(date +'%Y%m%d%H%M%S')
