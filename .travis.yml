@@ -27,13 +27,12 @@ before_install:
 #  - docker run $ARCHITECTURE
   - docker ps -a
 script:
-  - export DATE=$(date +'%Y%m%d%H%M%S')
-  - export BUILD_VERSION=1.$DATE
-  - export BUILD_DATE=$(date "+%Y%m%d")
+  - export NUMBER=$(date +'%Y%m%d%H%M%S')
+  - export BUILD_VERSION=1.$NUMBER
   - export ARCH=$(basename $ARCHITECTURE)
   - export DIST=$(dirname $ARCHITECTURE)
-  - docker run -v $PWD:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp; cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}; make -j1; make package"
-  - cp ${PACKAGE_NAME}-1.${DATE}-Linux.deb ${PACKAGE_NAME}-1.${DATE}-${DIST}_${ARCH}.deb 
+  - docker run -v $PWD:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp; cmake . -DBUILD_LUA=OFF -DMINOR=${NUMBER}; make -j1; make package"
+  - cp ${PACKAGE_NAME}-${BUILD_VERSION}-Linux.deb ${PACKAGE_NAME}-${BUILD_VERSION}-${DIST}_${ARCH}.deb 
 
 before_deploy:
   # Set the packages name and details in the descriptor file
@@ -46,7 +45,7 @@ before_deploy:
   - sed -i "s/__DIST__/$DIST/g" bintray-descriptor.json
   - cat bintray-descriptor.json
   - ls
-  - git tag "${DATE}" || true
+  - git tag "${BUILD_VERSION}" || true
 
 deploy:
   - provider: releases
