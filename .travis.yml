@@ -45,13 +45,14 @@ before_deploy:
   - sed -i "s/__ARCHITECTURE__/$ARCH/g" bintray-descriptor.json
   - sed -i "s/__DIST__/$DIST/g" bintray-descriptor.json
   - cat bintray-descriptor.json
+  - ls
   - git tag "${DATE}" || true
 
 deploy:
   - provider: releases
     api_key: $GITHUB_API_KEY
     file_glob: true
-    file: ubox-*-$DIST_$ARCH.deb 
+    file: ubox-*-${DIST}_${ARCH}.deb 
     skip_cleanup: true
     on:
       branch: master
