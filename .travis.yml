@@ -31,9 +31,7 @@ script:
   - export BUILD_VERSION=1.$DATE
   - export BUILD_DATE=$(date "+%Y%m%d")    
   - ls
-  - docker run -v $PWD:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp;ls ; cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}"  
-  - make -j1
-  - make package
+  - docker run -v $PWD:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp; ls; cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}; make -j1; make package"  
 
 before_deploy:
   # Set the packages name and details in the descriptor file
