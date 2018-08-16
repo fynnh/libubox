@@ -14,28 +14,26 @@ env:
   - PACKAGE_NAME=ubox
   - BINTRAY_REPO_NAME=debian
   - BINTRAY_LICENSE=ISC
+  matrix:
+  - DIST=ubuntu/trusty
+  - ARCHITECTURE=amd64
+  
+sudo: required
 
-
-dist: trusty
-language: cpp
-compiler: gcc
-addons:
-  apt:
-    packages:
-    - cmake
-    - lua5.2
-    - libjson-c-dev
-    - liblua5.2-dev
+services:
+  - docker
     
 before_install:
+  - docker build -t $DIST/$ARCHITECTURE $DIST/$ARCHITECTURE
+  - docker run $DIST/$ARCHITECTURE
+  - docker ps -a
+script:
   - export DATE=$(date +'%Y%m%d%H%M%S')
   - export BUILD_VERSION=1.$DATE
   - export BUILD_DATE=$(date "+%Y%m%d")    
-    
-script:
-- cmake . -DBUILD_LUA=OFF -DMINOR="${DATE}"
-- make -j1
-- make package
+  - cmake . -DBUILD_LUA=OFF -DMINOR="${DATE}"
+  - make -j1
+  - make package
 
 before_deploy:
   # Set the packages name and details in the descriptor file
