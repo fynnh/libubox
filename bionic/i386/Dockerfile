@@ -1,4 +1,4 @@
-FROM i386/ubuntu:14.04
+FROM i386/ubuntu:18.04
 
 RUN apt-get update && apt-get install -y \
   build-essential \
