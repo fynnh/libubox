@@ -16,7 +16,7 @@ env:
   - BINTRAY_LICENSE=ISC
   matrix:
   - ARCHITECTURE=ubuntu/trusty/amd64
-  
+  - ARCHITECTURE=ubuntu/trusty/i386  
 sudo: required
 
 services:
