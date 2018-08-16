@@ -30,7 +30,7 @@ script:
   - export DATE=$(date +'%Y%m%d%H%M%S')
   - export BUILD_VERSION=1.$DATE
   - export BUILD_DATE=$(date "+%Y%m%d")    
-  - docker run -v .:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp; cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}"  
+  - docker run -v $PWD:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp; cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}"  
   - make -j1
   - make package
 
