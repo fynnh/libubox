@@ -27,7 +27,7 @@ before_install:
 #  - docker run $ARCHITECTURE
   - docker ps -a
 script:
-  - export NUMBER=$(date +'%Y%m%d%H%M%S')
+  - export NUMBER=${TRAVIS_BUILD_NUMBER}
   - export BUILD_VERSION=1.$NUMBER
   - export ARCH=$(basename $ARCHITECTURE)
   - export DIST=$(dirname $ARCHITECTURE)
