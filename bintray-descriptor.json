@@ -16,7 +16,7 @@
 
 	"files": [
 		{
-			"includePattern": "./(.[^/]*(\\__ARCHITECTURE__.deb)$)",
+			"includePattern": ".*__ARCHITECTURE__.deb",
 			"uploadPattern": "pool/main/__NAME__/$1",
 			"matrixParams": {
 				"deb_distribution": "__DIST__",
