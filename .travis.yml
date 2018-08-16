@@ -40,6 +40,7 @@ before_deploy:
   - sed -i "s/__SUBJECT__/$BINTRAY_USER/g" bintray-descriptor.json
   - sed -i "s/__LICENSE__/$BINTRAY_LICENSE/g" bintray-descriptor.json
   - sed -i "s/__VERSION__/$BUILD_VERSION/g" bintray-descriptor.json
+  - sed -i "s/__ARCHITECTURE__/$(basename $ARCHITECTURE)/g" bintray-descriptor.json
   - git tag "${DATE}" || true
 
 deploy:

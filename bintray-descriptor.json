@@ -21,7 +21,7 @@
 			"matrixParams": {
 				"deb_distribution": "trusty",
 				"deb_component": "main",
-				"deb_architecture": "amd64"
+				"deb_architecture": "__ARCHITECTURE__"
 			}
 		}
 	],
