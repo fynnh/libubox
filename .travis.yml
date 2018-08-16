@@ -32,8 +32,7 @@ script:
   - export BUILD_DATE=$(date "+%Y%m%d")
   - export ARCH=$(basename $ARCHITECTURE)
   - export DIST=$(dirname $ARCHITECTURE)
-  - ls
-  - docker run -v $PWD:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp; ls; cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}; make -j1; make package"
+  - docker run -v $PWD:/tmp $ARCHITECTURE /bin/sh -c "cd /tmp; cmake . -DBUILD_LUA=OFF -DMINOR=${DATE}; make -j1; make package"
   - cp $PACKAGE_NAME-1.$DATE-Linux.deb $PACKAGE_NAME-1.$DATE-$DIST_$ARCH.deb 
 
 before_deploy:
@@ -51,7 +50,7 @@ deploy:
   - provider: releases
     api_key: $GITHUB_API_KEY
     file_glob: true
-    file: ubox-*-Linux_$ARCH.deb 
+    file: ubox-*-$DIST_$ARCH.deb 
     skip_cleanup: true
     on:
       branch: master
